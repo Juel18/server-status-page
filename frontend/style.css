@@ -1,1 +1,27 @@
+body {
+    background: radial-gradient(circle at top, #000, #0f172a);
+    font-family: 'Orbitron', sans-serif;
+    color: #00ffff;
+    text-align: center;
+}
+
+.card {
+    margin: 40px auto;
+    width: 600px;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid #00ffff;
+    box-shadow: 0 0 20px #00ffff;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.online {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { text-shadow: 0 0 5px #00ffff; }
+    50% { text-shadow: 0 0 20px #00ffff; }
+    100% { text-shadow: 0 0 5px #00ffff; }
+}
 
