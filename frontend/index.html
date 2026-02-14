@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="card">
+    <h2>SERVER STATUS</h2>
+    <p id="status">Connecting...</p>
+    <p id="players"></p>
+    <canvas id="chart"></canvas>
+</div>
+
+<script>
+const ws = new WebSocket("wss://YOUR_BACKEND_URL");
+
+const ctx = document.getElementById("chart");
+const chart = new Chart(ctx, {
+    type: "line",
+    data: { labels: [], datasets: [{ label: "Players", data: [] }] }
+});
+
+ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+
+    document.getElementById("status").innerText =
+        data.online ? "🟢 ONLINE" : "🔴 OFFLINE";
+
+    document.getElementById("players").innerText =
+        `Players: ${data.players?.online || 0}/${data.players?.max || 0}`;
+};
+</script>
+
+</body>
+</html>
 
