@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Server Status</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    background: #0f172a;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.card {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 12px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.status-online {
+    color: #22c55e;
+}
+.status-offline {
+    color: #ef4444;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Minecraft Server Status</h2>
+    <p><strong>IP:</strong> play.yourserver.com</p>
+    <p id="status">Checking...</p>
+    <p id="players"></p>
+    <p id="version"></p>
+    <p id="motd"></p>
+</div>
+
+<script>
+const serverIP = "play.yourserver.com";
+
+async function fetchStatus() {
+    try {
+        const response = await fetch(`https://api.mcsrvstat.us/2/${serverIP}`);
+        const data = await response.json();
+
+        if (data.online) {
+            document.getElementById("status").innerHTML =
+                `<span class="status-online">🟢 Online</span>`;
+
+            document.getElementById("players").innerText =
+                `Players: ${data.players.online} / ${data.players.max}`;
+
+            document.getElementById("version").innerText =
+                `Version: ${data.version}`;
+
+            document.getElementById("motd").innerText =
+                `MOTD: ${data.motd.clean.join(" ")}`;
+        } else {
+            document.getElementById("status").innerHTML =
+                `<span class="status-offline">🔴 Offline</span>`;
+        }
+
+    } catch (error) {
+        document.getElementById("status").innerText = "Error fetching server data";
+    }
+}
+
+fetchStatus();
+setInterval(fetchStatus, 10000); // updates every 10 seconds
+</script>
+
+</body>
+</html>
