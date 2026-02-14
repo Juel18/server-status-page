@@ -17,8 +17,8 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
-const SERVER_IP = "play.yourserver.com";
-const DISCORD_WEBHOOK = "YOUR_DISCORD_WEBHOOK";
+const SERVER_IP = "mslc.mc-complex.com";
+const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1472065540112519314/wiYrjhfjcTL_aEsRpcLzD_QaFTEAEuFFZyYZfxUiLV7jyzBnqlecZcrG8PZO7L9PIcka";
 const ADMIN_USER = "admin";
 const ADMIN_PASS_HASH = bcrypt.hashSync("password123", 10);
 
